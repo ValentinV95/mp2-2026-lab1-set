@@ -99,15 +99,16 @@ bool TBitField::operator==(const TBitField& bf) const // сравнение
 	if (BitLen != bf.BitLen) {
 		return false;
 	}
+
 	for (int i = 0; i < MemLen - 1; ++i) {
 		if (pMem[i] != bf.pMem[i]) {
 			return false;
 		}
 	}
-	int unused_bits = MemLen * SIZE_TELEM_BIT - BitLen;
-	TELEM mask = (1 << (SIZE_TELEM_BIT - unused_bits)) - 1;
-	return (pMem[MemLen - 1] & mask) == (bf.pMem[MemLen - 1] & mask);
 
+	int used_bits = BitLen % SIZE_TELEM_BIT;
+	TELEM mask = (1 << used_bits) - 1;
+	return (pMem[MemLen - 1] & mask) == (bf.pMem[MemLen - 1] & mask);
 }
 
 bool TBitField::operator!=(const TBitField& bf) const // сравнение
@@ -118,35 +119,22 @@ bool TBitField::operator!=(const TBitField& bf) const // сравнение
 TBitField TBitField::operator|(const TBitField& bf) const // операция "или"
 {
 	int maxBitLen = max(BitLen, bf.BitLen);
+	int minMemLen = min(MemLen, bf.MemLen);
 	TBitField res(maxBitLen);
 
-	for (int i = 0; i < res.MemLen; i++) {
-		TELEM val1 = 0;
-		TELEM val2 = 0;
 
-		if (i < MemLen) {
-			val1 = pMem[i];
-			if (i == MemLen - 1) {
-				int unused = MemLen * SIZE_TELEM_BIT - BitLen;
-				if (unused) {
-					TELEM full_mask = ~(TELEM)0;
-					val1 &= (full_mask >> unused);
-				}
-			}
+	for (int i = 0; i < minMemLen; ++i) {
+		res.pMem[i] = pMem[i] | bf.pMem[i];
+	}
+	if (MemLen > minMemLen) {
+		for (int i = minMemLen; i < MemLen; ++i) {
+			res.pMem[i] = pMem[i];
 		}
-
-		if (i < bf.MemLen) {
-			val2 = bf.pMem[i];
-			if (i == bf.MemLen - 1) {
-				int unused = bf.MemLen * SIZE_TELEM_BIT - bf.BitLen;
-				if (unused) {
-					TELEM full_mask = ~(TELEM)0;
-					val2 &= (full_mask >> unused);
-				}
-			}
+	}
+	else if (bf.MemLen > minMemLen) {
+		for (int i = minMemLen; i < bf.MemLen; ++i) {
+			res.pMem[i] = bf.pMem[i];
 		}
-
-		res.pMem[i] = val1 | val2;
 	}
 
 	return res;
@@ -180,8 +168,12 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 	string input;
 	istr >> input; 
 	for (int i = 0; i < input.size() && i < bf.GetLength(); i++) {
-		if (input[i] == '1') bf.SetBit(i);
-		else if (input[i] == '0') bf.ClrBit(i);
+		if (input[i] == '1') {
+			bf.SetBit(i);
+		}
+		else if (input[i] == '0') {
+			bf.ClrBit(i);
+		}
 	}
 	return istr;
 }
