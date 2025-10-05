@@ -29,12 +29,12 @@ TSet::operator TBitField()
 	return BitField;
 }
 
-int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
+int TSet::GetMaxPower(void) const // получить макс.  к-во эл-тов
 {
 	return MaxPower;
 }
 
-int TSet::IsMember(const int Elem) const // элемент множества?
+int TSet::IsMember(const int Elem) const // элемент  множества?
 {
 	if (Elem < 0 || Elem > MaxPower) throw std::out_of_range("Invalid index");
 	else return BitField.GetBit(Elem);
