@@ -1,88 +1,165 @@
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
-//
-// tset.cpp - Copyright (c) Гергель В.П. 04.10.2001
-//   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
-//
-// Множество - реализация через битовые поля
-
 #include "tset.h"
+#include <sstream>
+#include <string>
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : MaxPower(mp), BitField(mp)
 {
+    if (mp <= 0)
+        throw std::invalid_argument("MaxPower must be positive"); // Все прочие исключения вызовутся у битполя
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(-1)
+TSet::TSet(const TSet& s) : MaxPower(s.MaxPower), BitField(s.BitField)
 {
+    // Копируются данные из объекта s, исключения есть в классе битполя
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(-1)
+TSet::TSet(const TBitField& bf) : MaxPower(bf.GetLength()), BitField(bf)
 {
 }
 
-TSet::operator TBitField()
+TSet::operator TBitField() // Оператор преобразования TSet в TBitField
 {
+    return BitField;
 }
 
-int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
+int TSet::GetMaxPower(void) const // Получение мощности универса
 {
+    return MaxPower;
 }
 
-int TSet::IsMember(const int Elem) const // элемент множества?
+int TSet::IsMember(const int Elem) const
 {
-    return 0;
+    return BitField.GetBit(Elem); // Если элемент есть, то его бит 1, если нет - 0. Булевый диапазон значений
 }
 
-void TSet::InsElem(const int Elem) // включение элемента множества
+void TSet::InsElem(const int Elem) // Добавление элемента
 {
+    BitField.SetBit(Elem); // Установка бита элемента
 }
 
-void TSet::DelElem(const int Elem) // исключение элемента множества
+void TSet::DelElem(const int Elem) // Удаление элемента
 {
+    BitField.ClrBit(Elem); // Очистка бита элемента
 }
 
 // теоретико-множественные операции
 
-TSet& TSet::operator=(const TSet &s) // присваивание
+TSet& TSet::operator=(const TSet& s) // Присваивание
 {
+    if (this != &s)
+    {
+        MaxPower = s.MaxPower;
+        BitField = s.BitField;
+    }
+    return *this;
 }
 
-int TSet::operator==(const TSet &s) const // сравнение
+int TSet::operator==(const TSet& s) const // сравнение
 {
-    return 0;
+    return (MaxPower == s.MaxPower) && (BitField == s.BitField);
 }
 
-int TSet::operator!=(const TSet &s) const // сравнение
+int TSet::operator!=(const TSet& s) const // Отрицание равенства
 {
+    return !(*this == s);
 }
 
-TSet TSet::operator+(const TSet &s) // объединение
+TSet TSet::operator+ (const TSet& s)
 {
+    int resultMaxPower = (MaxPower > s.MaxPower) ? MaxPower : s.MaxPower;
+    TSet result(resultMaxPower);
+    result.BitField = BitField | s.BitField;
+    return result;
 }
 
-TSet TSet::operator+(const int Elem) // объединение с элементом
+TSet TSet::operator+ (const int Elem) // Добавление элемента
 {
+    TSet result(*this); // Копируем текущее множество
+    result.InsElem(Elem); // Добавляем элемент
+    return result;
 }
 
-TSet TSet::operator-(const int Elem) // разность с элементом
+TSet TSet::operator- (const int Elem) // Удаление элемента
 {
+    TSet result(*this);
+    result.DelElem(Elem);
+    return result;
 }
 
-TSet TSet::operator*(const TSet &s) // пересечение
+TSet TSet::operator* (const TSet& s)
 {
+    int resultMaxPower = (MaxPower > s.MaxPower) ? MaxPower : s.MaxPower;
+    TSet result(resultMaxPower);
+    result.BitField = BitField & s.BitField;
+    return result;
 }
 
-TSet TSet::operator~(void) // дополнение
+TSet TSet::operator~ (void)
 {
+    TSet result(MaxPower);
+    result.BitField = ~BitField;
+    return result;
 }
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод
+istream& operator>>(istream& istr, TSet& s)
 {
+    int maxPower; // Нам нужно узнать максимальную мощность
+    istr >> maxPower; // Вводим чиселку
+    // Если у нас будет ошибка формата ввода (или мы введем отрицательную мощность) у нас будет исключение
+    if (istr.fail() || maxPower <= 0)
+        throw std::invalid_argument("Invalid max power");
+
+    TSet temp(maxPower); // Создаем временный объект
+
+    string line;
+    getline(istr, line); // Записываем весь входной поток в строку
+
+    // Если строка пустая (был перевод строки сразу после maxPower),
+    // читаем следующую строку
+    if (line.empty()) {
+        getline(istr, line);
+    }
+
+    istringstream iss(line); // Превращаем строку в поток
+    int elem;
+    while (iss >> elem)
+    {
+        if (elem > maxPower || elem < 0)
+            throw std::invalid_argument("Element out of range");
+        temp.InsElem(elem);
+    }
+
+    // Обрабатываем возникшее исключение формата
+    if (iss.fail() && !iss.eof())
+    {
+        throw std::invalid_argument("Invalid element format");
+    }
+
+    s = temp;
+    return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream& ostr, const TSet& s)
 {
+    ostr << "{ "; // Сначала выведем открывающую множество скобку
+
+    // Выведем все элементы множества
+    for (int i = 0; i < s.GetMaxPower(); i++)
+    {
+        if (s.IsMember(i))
+            ostr << i << " ";
+
+        // Каждые 32 бита будем делать перенос строки для читаемости
+        if ((i + 1) % 32 == 0)
+            ostr << endl << " ";
+    }
+
+    // Закрываем множество скобкой
+    ostr << "}";
+
+    return ostr; // Возвращаем поток для цепочки ввода
 }
