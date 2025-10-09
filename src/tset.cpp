@@ -4,8 +4,7 @@
 
 TSet::TSet(int mp) : MaxPower(mp), BitField(mp)
 {
-    if (mp <= 0)
-        throw std::invalid_argument("MaxPower must be positive"); // Все прочие исключения вызовутся у битполя
+
 }
 
 // конструктор копирования
