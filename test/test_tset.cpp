@@ -295,3 +295,52 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+//свои тесты ------------------------------------------------------------------------
+
+TEST(TSet, cas_set_self_assign)
+{
+    const int size = 4;
+    TSet set(size);
+    set.InsElem(2);
+    set.InsElem(3);
+    set = set;
+
+    EXPECT_EQ(0, set.IsMember(0));
+    EXPECT_EQ(0, set.IsMember(1));
+    EXPECT_NE(0, set.IsMember(2));
+    EXPECT_NE(0, set.IsMember(3));
+}
+
+TEST(TSet, can_delete_element_with_minus_operator)
+{
+    const int size = 4;
+    TSet set(size);
+    set.InsElem(1);
+    set.InsElem(2);
+    set.InsElem(3);
+
+    set = set - 3;
+
+    EXPECT_EQ(0, set.IsMember(0));
+    EXPECT_NE(0, set.IsMember(1));
+    EXPECT_NE(0, set.IsMember(2));
+    EXPECT_EQ(0, set.IsMember(3));
+
+}
+
+TEST(TSet, can_delete_non_existing_element_with_minus_operator)
+{
+    const int size = 4;
+    TSet set(size);
+    set.InsElem(1);
+    set.InsElem(2);
+
+    set = set - 3;
+
+    EXPECT_EQ(0, set.IsMember(0));
+    EXPECT_NE(0, set.IsMember(1));
+    EXPECT_NE(0, set.IsMember(2));
+    EXPECT_EQ(0, set.IsMember(3));
+
+}
