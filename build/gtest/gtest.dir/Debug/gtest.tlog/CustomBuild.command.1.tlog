@@ -1,0 +1,10 @@
+^C:\USERS\АДМИНИСТРАТОР\SOURCE\MP2-2026-LAB1-SET\GTEST\CMAKELISTS.TXT
+setlocal
+D:\vscode\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SC:/Users/Администратор/source/mp2-2026-lab1-set -BC:/Users/Администратор/source/mp2-2026-lab1-set/build --check-stamp-file C:/Users/Администратор/source/mp2-2026-lab1-set/build/gtest/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

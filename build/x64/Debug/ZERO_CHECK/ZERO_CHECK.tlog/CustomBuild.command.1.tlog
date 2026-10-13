@@ -1,0 +1,10 @@
+^C:\USERS\АДМИНИСТРАТОР\SOURCE\MP2-2026-LAB1-SET\BUILD\CMAKEFILES\8F3804E820E905DA69BD3ED077504B5B\GENERATE.STAMP.RULE
+setlocal
+D:\vscode\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SC:/Users/Администратор/source/mp2-2026-lab1-set -BC:/Users/Администратор/source/mp2-2026-lab1-set/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Администратор/source/mp2-2026-lab1-set/build/set.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

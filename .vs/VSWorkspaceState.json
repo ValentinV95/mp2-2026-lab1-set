@@ -1,0 +1,18 @@
+{
+  "OutputFoldersPerTargetSystem": {
+    "Local Machine": [
+      "out\\build\\x64-Debug",
+      "out\\install\\x64-Debug"
+    ]
+  },
+  "ExpandedNodes": [
+    "",
+    "\\samples",
+    "\\sln",
+    "\\sln\\vc10",
+    "\\sln\\vc10\\gtest",
+    "\\src",
+    "\\test"
+  ],
+  "PreviewInSolutionExplorer": false
+}
