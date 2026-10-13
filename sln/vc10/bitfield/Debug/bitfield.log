@@ -1,0 +1,15 @@
+﻿cl : командная строка  warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  tbitfield.cpp
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(103,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(113,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(126,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(129,32): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(134,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(137,29): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(151,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(154,32): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(159,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(162,29): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(174,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Admin\Source\Repos\mp2-2026-lab1-set\src\tbitfield.cpp(195,23): warning C4018: <: несоответствие типов со знаком и без знака
+  bitfield.vcxproj -> C:\Users\Admin\source\repos\mp2-2026-lab1-set\sln\vc10\Debug\bitfield.lib
