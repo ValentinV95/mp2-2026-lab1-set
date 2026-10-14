@@ -295,3 +295,28 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, single_element_set_only_that_element)
+{
+  TSet set(5);
+  set.InsElem(2);
+  EXPECT_NE(0, set.IsMember(2));
+  EXPECT_EQ(0, set.IsMember(0));
+  EXPECT_EQ(0, set.IsMember(4));
+}
+TEST(TSet, element_is_gone_after_delete)
+{
+  TSet set(5);
+  set.InsElem(1);
+  set.DelElem(1);
+  EXPECT_EQ(0, set.IsMember(1));
+}
+TEST(TSet, can_hold_multiple_different_elements)
+{
+  TSet set(6);
+  set.InsElem(1);
+  set.InsElem(3);
+  set.InsElem(5);
+  EXPECT_NE(0, set.IsMember(1));
+  EXPECT_NE(0, set.IsMember(3));
+  EXPECT_NE(0, set.IsMember(5));
+}

@@ -290,3 +290,25 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+TEST(TBitField, set_bit_at_zero_works)
+{
+  TBitField bf(8);
+  bf.SetBit(0);
+  EXPECT_EQ(1, bf.GetBit(0));
+}
+TEST(TBitField, double_set_bit_keeps_it_set)
+{
+  TBitField bf(8);
+  bf.SetBit(3);
+  bf.SetBit(3);
+  EXPECT_EQ(1, bf.GetBit(3));
+}
+TEST(TBitField, can_clear_bit_at_ind_8)
+{
+  TBitField bf(15);
+  int bitIdx = 8;
+  bf.SetBit(bitIdx);
+  EXPECT_NE(0, bf.GetBit(bitIdx));
+  bf.ClrBit(bitIdx);
+  EXPECT_EQ(0, bf.GetBit(bitIdx));
+}
