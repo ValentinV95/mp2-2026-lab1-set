@@ -295,3 +295,34 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, creation_and_deletion_of_the_same_elements) 
+{
+	TSet set(5);
+	set.InsElem(1);
+	set.InsElem(2);
+	set.InsElem(3);
+	set.DelElem(1);
+	set.DelElem(2);
+	set.DelElem(3);
+
+	for (int i = 0; i < 5; i++)
+		EXPECT_EQ(0, set.IsMember(i));
+
+}
+
+TEST(TSet, throws_when_insert_element_out_of_range)
+{
+	const int size = 5;
+	TSet set(size);
+
+	ASSERT_ANY_THROW(set.InsElem(-1));
+	
+	ASSERT_ANY_THROW(set.InsElem(5));
+	ASSERT_ANY_THROW(set.InsElem(10));
+
+	for (int i = 0; i < size; i++) 
+	{
+		EXPECT_EQ(0, set.IsMember(i));
+	}
+}

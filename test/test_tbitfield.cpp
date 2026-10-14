@@ -290,3 +290,30 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_create_bitfield_of_zero_length)
+{
+    ASSERT_NO_THROW(TBitField bf(0));
+    
+    TBitField bf(0);
+    EXPECT_EQ(0, bf.GetLength());
+}
+
+TEST(TBitField, or_operator_is_commutative)
+{
+    const int size1 = 6, size2 = 7;
+    TBitField bf1(size1), bf2(size2), res1(size2), res2(size2);
+
+    bf1.SetBit(0);
+    bf1.SetBit(1);
+    bf1.SetBit(2);
+
+    bf2.SetBit(2);
+    bf2.SetBit(5);
+    bf2.SetBit(6);
+
+    res1 = bf1 | bf2;
+    res2 = bf2 | bf1;
+
+    EXPECT_EQ(res1, res2);
+}
