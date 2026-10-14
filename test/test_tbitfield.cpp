@@ -290,3 +290,31 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_set_all_bits_of_large_bitfield)
+{
+  const int size = 100;
+  TBitField bf(size);
+  for (int i = 0; i < size; i++)
+  {
+    bf.SetBit(i);
+  }
+
+  int sum = 0;
+  for (int i = 0; i < size; i++)
+  {
+    sum += bf.GetBit(i);
+  }
+
+  EXPECT_EQ(size, sum);
+}
+
+TEST(TBitField, assigned_bitfield_does_not_depend_on_source)
+{
+  const int size = 10;
+  TBitField bf1(size), bf2(size);
+  bf2 = bf1;
+  bf1.SetBit(5);
+
+  EXPECT_EQ(0, bf2.GetBit(5));
+}

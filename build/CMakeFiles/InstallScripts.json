@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/vladimir/Afanasov_Lab1/build/cmake_install.cmake",
+		"/Users/vladimir/Afanasov_Lab1/build/src/cmake_install.cmake",
+		"/Users/vladimir/Afanasov_Lab1/build/samples/cmake_install.cmake",
+		"/Users/vladimir/Afanasov_Lab1/build/gtest/cmake_install.cmake",
+		"/Users/vladimir/Afanasov_Lab1/build/test/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
