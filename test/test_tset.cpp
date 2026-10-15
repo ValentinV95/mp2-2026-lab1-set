@@ -295,3 +295,24 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, delete_element_using_minus)
+{
+    TSet tset(10);
+	tset.InsElem(2);
+	tset.InsElem(9);
+	TSet new_tset = tset - 2;
+
+	EXPECT_EQ(0, new_tset.IsMember(2));
+	EXPECT_EQ(1, tset.IsMember(9));
+}
+
+TEST(TSet, copy_constructor_makes_independent_copy)
+{
+	TSet tset1(10);
+	tset1.InsElem(5);
+	TSet tset2(tset1);
+	tset1.DelElem(5);
+
+	EXPECT_EQ(1, tset2.IsMember(5));
+}

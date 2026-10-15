@@ -290,3 +290,24 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, assign_bitfield_to_itself)
+{
+	TBitField bf(10);
+	bf.SetBit(3);
+	bf.SetBit(7);
+	bf = bf;
+
+	EXPECT_EQ(1, bf.GetBit(3));
+	EXPECT_EQ(1, bf.GetBit(7));
+}
+
+TEST(TBitField, set_bits_on_memory_border)
+{
+	TBitField bf(sizeof(TELEM) * 8 + 1);
+	bf.SetBit(sizeof(TELEM) * 8 - 1);
+	bf.SetBit(sizeof(TELEM) * 8);
+
+	EXPECT_EQ(1, bf.GetBit(sizeof(TELEM) * 8 - 1));
+    EXPECT_EQ(1, bf.GetBit(sizeof(TELEM) * 8));
+}
