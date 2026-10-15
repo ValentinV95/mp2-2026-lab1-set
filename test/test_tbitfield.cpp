@@ -290,3 +290,13 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, copy_constructor_makes_independent_copy)
+{
+  TBitField bf1(10);
+  bf1.SetBit(5);
+  TBitField bf2(bf1);
+  bf1.ClrBit(5);
+
+  EXPECT_EQ(1, bf2.GetBit(5));
+}

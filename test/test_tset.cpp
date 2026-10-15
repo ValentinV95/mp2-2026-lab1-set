@@ -295,3 +295,20 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, throws_when_insert_element_out_of_range)
+{
+  TSet set(5);
+
+  ASSERT_ANY_THROW(set.InsElem(5));
+}
+
+TEST(TSet, minus_operator_does_not_change_original)
+{
+  TSet set(5);
+  set.InsElem(2);
+  TSet res = set - 2;
+
+  EXPECT_EQ(1, set.IsMember(2));
+  EXPECT_EQ(0, res.IsMember(2));
+}
