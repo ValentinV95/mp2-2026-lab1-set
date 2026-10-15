@@ -295,3 +295,31 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+//проверка конструктора TSet
+TEST(TSet, constructor_TSet_from_bitfield) {
+    TBitField bf(5);
+    bf.SetBit(1);
+    TSet s(bf);
+    EXPECT_EQ(5, s.GetMaxPower());
+    EXPECT_EQ(1, s.IsMember(1));
+}
+
+//выход за границы
+TEST(TSet, insert_out_of_range_throws) {
+    TSet s(5);
+    ASSERT_ANY_THROW(s.InsElem(-1));
+    ASSERT_ANY_THROW(s.InsElem(5));
+}
+
+//сравнение полного и пустого множества
+TEST(TSet, complement_empty_and_full) {
+    TSet empty(4);
+    TSet full(4);
+    for (int i = 0; i < 4; ++i) full.InsElem(i);
+
+    TSet invEmpty = ~empty;
+    TSet invFull = ~full;
+    EXPECT_EQ(full, invEmpty);
+    EXPECT_EQ(empty, invFull);
+}

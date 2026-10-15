@@ -1,0 +1,5 @@
+﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  tset.cpp
+  tbitfield.cpp
+  Generating Code...
+  bitfield.vcxproj -> C:\Users\Marat\Ttt\sln\vc10\Debug\bitfield.lib

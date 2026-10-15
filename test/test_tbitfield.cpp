@@ -290,3 +290,33 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+//проверка конструктора
+TEST(TBitField, constructor_TBitField)
+{
+    const int len = 10;
+    TBitField bf(len);
+
+    EXPECT_EQ(len, bf.GetLength());
+    for (int i = 0; i < len; i++) {
+        EXPECT_EQ(0, bf.GetBit(i));
+    }
+}
+
+//проверка нулевой длины
+TEST(TBitField, zero_length) {
+    TBitField bf(0);
+    EXPECT_EQ(0, bf.GetLength());
+    ASSERT_ANY_THROW(bf.SetBit(0));
+    ASSERT_ANY_THROW(bf.GetBit(0));
+    ASSERT_ANY_THROW(bf.ClrBit(0));
+}
+
+//двойное отрицание
+TEST(TBitField, double_negation) {
+    TBitField bf(10);
+    bf.SetBit(3);
+    bf.SetBit(7);
+    TBitField back = ~~bf;
+    EXPECT_EQ(bf, back);
+}

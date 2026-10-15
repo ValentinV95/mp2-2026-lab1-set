@@ -1,0 +1,4 @@
+﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  sample_prime_numbers.cpp
+sample_prime_numbers.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  sample_prime_numbers.vcxproj -> C:\Users\Marat\Ttt\sln\vc10\Debug\sample_prime_numbers.exe

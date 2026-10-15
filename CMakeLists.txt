@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.14)
 
 set(PROJECT_NAME set)
 project(${PROJECT_NAME})
+#set(CMAKE_CXX_STANDARD 14)
 
 # TODO(Kornyakov): not sure if these lines are needed
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
@@ -25,6 +26,7 @@ add_subdirectory(src)
 add_subdirectory(samples)
 add_subdirectory(gtest)
 add_subdirectory(test)
+add_definitions(-D_SILENCE_TR1_DEPRECATION_WARNINGS)
 
 # REPORT
 message( STATUS "")
