@@ -1,3 +1,8 @@
+# Visual Studio
+sln/vc10/.vs/
+sln/vc10/**/Debug/
+sln/vc10/**/Release/
+*.vcxproj.user
 # Compiled Object files
 *.slo
 *.lo
