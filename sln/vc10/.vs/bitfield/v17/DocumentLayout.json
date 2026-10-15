@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\sln\\vc10\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\src\\tbitfield.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A76282B3-4276-4945-9AF2-3AC68111A828}|bitfield\\bitfield.vcxproj|D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\src\\tset.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "tset.cpp",
+              "DocumentMoniker": "D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\src\\tset.cpp",
+              "RelativeDocumentMoniker": "..\\..\\src\\tset.cpp",
+              "ToolTip": "D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\src\\tset.cpp",
+              "RelativeToolTip": "..\\..\\src\\tset.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-10-10T18:33:28.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "tbitfield.cpp",
+              "DocumentMoniker": "D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\src\\tbitfield.cpp",
+              "RelativeDocumentMoniker": "..\\..\\src\\tbitfield.cpp",
+              "ToolTip": "D:\\ptu\\prog\\lw1\\Elizarov-Sergei\\src\\tbitfield.cpp",
+              "RelativeToolTip": "..\\..\\src\\tbitfield.cpp",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAQwNMAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-10-10T18:33:27.358Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

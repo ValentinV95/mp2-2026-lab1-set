@@ -295,3 +295,41 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, max_power_of_intersection)
+{
+	const int size1 = 16;
+	const int size2 = 23;
+	TSet a(size1);
+	TSet b(size2);
+	TSet result = a * b;
+	EXPECT_EQ(result.GetMaxPower(), ((TBitField)result).GetLength());
+}	
+
+TEST(TSet, subtraction_test)
+{
+	const int size = 42;
+	const int elem = 14;
+	const int fakeelem = 22;
+	TSet set(size);
+	TSet trueset(size);
+	set.InsElem(elem);
+	set=set-elem;
+	EXPECT_EQ(set.IsMember(elem), 0);
+	set = set - fakeelem;
+	EXPECT_EQ(trueset, set);
+}
+
+TEST(TSet, intersect_set_and_reversed_set)
+{
+	const int size = 42;
+	TSet defaultset(size);
+	defaultset.InsElem(1);
+	defaultset.InsElem(2);
+	defaultset.InsElem(4);
+	TSet reversedset = ~defaultset;
+	TSet result = defaultset * reversedset;
+	for (int i = 0; i < size; i++) {
+		EXPECT_EQ(result.IsMember(i), 0);
+	}
+}
