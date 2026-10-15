@@ -290,3 +290,29 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+
+
+
+
+//новые тесты
+TEST(TBitField, can_create_copy_of_bitfield)
+{
+    const int size = 5;
+    TBitField bf1(size);
+    //bf1 = 01010
+    bf1.SetBit(1);
+    bf1.SetBit(3);
+    TBitField bf2(bf1);
+
+    EXPECT_EQ(bf1, bf2);
+}
+
+
+
+
+
+
+
+
+

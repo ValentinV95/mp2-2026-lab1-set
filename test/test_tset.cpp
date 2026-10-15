@@ -295,3 +295,21 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+
+
+
+
+//новые тесты
+TEST(TSet, can_create_copy_of_set)
+{
+	const int size = 5;
+	TSet set1(size);
+	//set1 = {0, 2, 3}
+	set1.InsElem(0);
+	set1.InsElem(2);
+	set1.InsElem(3);
+	TSet set2(set1);
+
+	EXPECT_EQ(set1, set2);
+}
