@@ -290,3 +290,35 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+
+//??????????? ?????
+
+TEST(TBitField, copy_construcctor)
+{
+    TBitField a(10);
+    a.SetBit(2);
+    a.SetBit(9);
+
+    TBitField b(a);
+    EXPECT_EQ(b, a);
+    EXPECT_EQ(a.GetLength(), b.GetLength());
+    EXPECT_EQ(10, b.GetLength());
+    EXPECT_EQ(1, b.GetBit(2));
+    EXPECT_EQ(1, b.GetBit(9));
+}
+
+TEST(TBitField, double_inversion) 
+{
+    TBitField a(33);
+    a.SetBit(26);
+    a.SetBit(15);
+    a.SetBit(5);
+    a.SetBit(11);
+    a.SetBit(28);
+    a.SetBit(19);
+
+    TBitField b = ~a;
+    TBitField c = ~b;
+    EXPECT_EQ(a, c);
+}

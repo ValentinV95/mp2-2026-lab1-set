@@ -1,4 +1,4 @@
-#include "tset.h"
+﻿#include "tset.h"
 
 #include <gtest.h>
 
@@ -294,4 +294,36 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+//добавленные тесты
+
+TEST(TSet, copy_contructor) 
+{
+	TSet a(10);
+	a.InsElem(3);
+	a.InsElem(9);
+
+	TSet b(a);
+	EXPECT_EQ(b, a);
+	EXPECT_EQ(a.GetMaxPower(), b.GetMaxPower());
+	EXPECT_EQ(10, b.GetMaxPower());
+	EXPECT_TRUE(b.IsMember(3));
+	EXPECT_TRUE(b.IsMember(9));
+}
+
+TEST(TSet, operator_minus_with_non_number_element)
+{
+	TSet a(8);
+	a.InsElem(2);
+	a.InsElem(5);
+
+	TSet b = a - 5;
+	TSet c = a - 4;
+
+	EXPECT_FALSE(b.IsMember(5));
+	EXPECT_TRUE(b.IsMember(2));
+	EXPECT_EQ(b.GetMaxPower(), 8);
+	
+	EXPECT_EQ(c, a);
 }
