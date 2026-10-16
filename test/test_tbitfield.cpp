@@ -290,3 +290,37 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_self_assign_bitfield)
+{
+    const int size = 4;
+    TBitField bf(size);
+    bf.SetBit(1);
+    bf.SetBit(3);
+    bf = bf;
+
+    EXPECT_EQ(0, bf.GetBit(0));
+    EXPECT_NE(0, bf.GetBit(1));
+    EXPECT_NE(0, bf.GetBit(3));
+}
+
+TEST(TBitField, not_equal_operator_with_bitfield)
+{
+    const int size = 4;
+    TBitField bf1(size), bf2(size);
+    bf1.SetBit(1);
+    bf2.SetBit(2);
+
+    EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, copy_constructor_bitfield)
+{
+    const int size = 4;
+    TBitField bf1(size);
+    bf1.SetBit(0);
+    bf1.SetBit(3);
+    TBitField bf2(bf1);
+
+    EXPECT_EQ(bf1, bf2);
+}

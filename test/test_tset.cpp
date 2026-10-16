@@ -295,3 +295,45 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_self_assign_set)
+{
+	const int size = 4;
+	TSet set(size);
+	set.InsElem(1);
+	set.InsElem(3);
+	set = set;
+
+	EXPECT_EQ(0, set.IsMember(0));
+	EXPECT_NE(0, set.IsMember(1));
+	EXPECT_NE(0, set.IsMember(3));
+}
+
+TEST(TSet, can_delete_element_using_minus_set)
+{
+	const int size = 5;
+	TSet set(size);
+	set.InsElem(1);
+	set.InsElem(2);
+	set.InsElem(3);
+	set = set - 2;
+
+	EXPECT_NE(0, set.IsMember(1));
+	EXPECT_EQ(0, set.IsMember(2));
+	EXPECT_NE(0, set.IsMember(3));
+}
+
+TEST(TSet, intersect_of_disjoint_sets)
+{
+	const int size = 4;
+	TSet set1(size), set2(size), zeroSet(size);
+	set1.InsElem(0);
+	set1.InsElem(1);
+
+	set2.InsElem(2);
+	set2.InsElem(3);
+
+	TSet res = set1 * set2;
+
+	EXPECT_EQ(zeroSet, res);
+}
