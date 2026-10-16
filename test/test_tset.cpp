@@ -295,3 +295,46 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_delete_same_element_twice)
+{
+    TSet set(5);
+
+    set.InsElem(2);
+    set.DelElem(2);
+    set.DelElem(2);
+
+    EXPECT_EQ(0, set.IsMember(2));
+}
+
+TEST(TSet, union_with_empty_set_preserves_elements)
+{
+    TSet set1(5), set2(5);
+
+    set1.InsElem(1);
+    set1.InsElem(4);
+
+    TSet result = set1 + set2;
+
+    EXPECT_NE(0, result.IsMember(1));
+    EXPECT_EQ(0, result.IsMember(2));
+    EXPECT_NE(0, result.IsMember(4));
+}
+
+TEST(TSet, intersection_of_disjoint_sets_is_empty)
+{
+    TSet set1(5), set2(5);
+
+    set1.InsElem(0);
+    set1.InsElem(2);
+
+    set2.InsElem(1);
+    set2.InsElem(3);
+
+    TSet result = set1 * set2;
+
+    for (int i = 0; i < result.GetMaxPower(); i++)
+    {
+        EXPECT_EQ(0, result.IsMember(i));
+    }
+}

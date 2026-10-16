@@ -290,3 +290,47 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, clearing_one_bit_does_not_change_other_bits)
+{
+    TBitField bf(5);
+
+    bf.SetBit(1);
+    bf.SetBit(3);
+    bf.ClrBit(1);
+
+    EXPECT_EQ(0, bf.GetBit(1));
+    EXPECT_EQ(1, bf.GetBit(3));
+}
+
+TEST(TBitField, copy_constructor_creates_independent_copy)
+{
+    TBitField bf1(5);
+    bf1.SetBit(2);
+
+    TBitField bf2(bf1);
+    bf2.SetBit(3);
+
+    EXPECT_EQ(1, bf1.GetBit(2));
+    EXPECT_EQ(0, bf1.GetBit(3));
+    EXPECT_EQ(1, bf2.GetBit(2));
+    EXPECT_EQ(1, bf2.GetBit(3));
+}
+
+TEST(TBitField, and_operator_returns_only_common_bits)
+{
+    TBitField bf1(4), bf2(4);
+
+    bf1.SetBit(1);
+    bf1.SetBit(2);
+
+    bf2.SetBit(2);
+    bf2.SetBit(3);
+
+    TBitField result = bf1 & bf2;
+
+    EXPECT_EQ(0, result.GetBit(0));
+    EXPECT_EQ(0, result.GetBit(1));
+    EXPECT_EQ(1, result.GetBit(2));
+    EXPECT_EQ(0, result.GetBit(3));
+}
