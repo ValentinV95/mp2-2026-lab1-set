@@ -295,3 +295,26 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+
+TEST(TSet, intersection_with_empty_set_is_empty)
+{
+	TSet set1(5), emptySet(5), result(5);
+	set1.InsElem(1);
+	set1.InsElem(3);
+
+	result = set1 * emptySet;
+
+	EXPECT_EQ(emptySet, result);
+}
+
+TEST(TSet, union_with_empty_set)
+{
+	TSet set(5), emptySet(5), result(5);
+	set.InsElem(1);
+	set.InsElem(3);
+
+	result = set + emptySet;
+
+	EXPECT_EQ(set, result);
+}
