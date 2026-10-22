@@ -290,3 +290,39 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+
+TEST(TBitField, clear_not_set_bit_keeps_it_zero)
+{
+    TBitField bf(10);
+
+    bf.ClrBit(4);
+
+    EXPECT_EQ(0, bf.GetBit(4));
+}
+
+TEST(TBitField, copied_bitfield_is_equal)
+{
+    TBitField bf1(10);
+    bf1.SetBit(3);
+
+    TBitField bf2(bf1);
+
+    EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, can_create_copied_bitfield)
+{
+    TBitField bf1(10);
+
+    ASSERT_NO_THROW(TBitField bf2(bf1));
+}
+
+TEST(TBitField, and_with_itself)
+{
+    TBitField bf(10);
+    bf.SetBit(2);
+    bf.SetBit(7);
+
+    EXPECT_EQ(bf, bf & bf);
+}
