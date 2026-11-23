@@ -295,3 +295,17 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+   TEST(TSet, intersection_with_empty_set_is_empty)
+   {
+     const int size = 5;
+     TSet set1(size), set2(size), set3(size), expSet(size);
+     // set1 = {1, 2}
+     set1.InsElem(1);
+     set1.InsElem(2);
+     // set2 = {}
+     set3 = set1 * set2;
+     // expSet = {}
+
+     EXPECT_EQ(expSet, set3);
+   }
