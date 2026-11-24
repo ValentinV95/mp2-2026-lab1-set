@@ -295,3 +295,9 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, Corect_Work_GetMaxPower_On_0_Length) {
+	TSet set(0);
+	
+	EXPECT_EQ(set.GetMaxPower(), 0);
+}

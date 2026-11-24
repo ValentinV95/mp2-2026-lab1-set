@@ -290,3 +290,35 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, implementation_of_the_De_Morgan_Acts){
+    const int size = 5;
+    TBitField bf1(size), bf2(size);
+
+    bf1.SetBit(0);
+    bf1.SetBit(3);
+
+    bf2.SetBit(1);
+    bf2.SetBit(2);
+
+    EXPECT_EQ(~(bf1 & bf2), ~bf1 | ~bf2);
+
+    EXPECT_EQ(~(bf1 | bf2), ~bf1 & ~bf2);
+}
+
+TEST(TBitField, Double_negation) {
+    const int size = 5;
+    TBitField bf1(size);
+    
+    bf1.SetBit(0);
+    bf1.SetBit(3);
+
+    EXPECT_EQ(bf1, ~(~bf1));
+}
+
+TEST(TBitField, Corect_Work_GetLength_On_0_Length_BitFild) {
+    TBitField bf(0);
+
+    EXPECT_EQ(0, bf.GetLength());
+}
+
