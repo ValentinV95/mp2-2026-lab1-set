@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+.vs/
+out/
+sln/vc10/bitfield/Debug/
+sln/vc10/bitfield/Release/bitfield.tlog/Cl.items.tlog
+sln/vc10/bitfield/Release/
+sln/vc10/Debug/
+sln/vc10/
+test/
