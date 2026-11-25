@@ -26,3 +26,15 @@
 *.exe
 *.out
 *.app
+
+.vs/
+.vscode/
+build/
+out/
+x64/
+*.pdb
+*.ilk
+*.exe
+*.obj
+CMakeCache.txt
+CMakeFiles/
